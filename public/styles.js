@@ -23,12 +23,35 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white'
   },
-  overlay: {
-    backgroundColor: 'red',
-    alignSelf: 'stretch',
-    width: null,
+  transparentContainer: {
+    flex: 1,
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  drawer: {
+    backgroundColor: 'transparent',
+    shadowColor: '#000000',
+    shadowOpacity: 0.8,
+    shadowRadius: 3,
+    textAlign: 'center',
+    height: 'auto'
+  },
+  centeredText: {
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  whiteText: {
+    marginTop: 25,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    textShadowColor: 'grey'
+  },
+  button: {
+    borderColor: 'white',
+    borderRadius: 1
   }
 });
 

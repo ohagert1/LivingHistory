@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import styles from './public/styles';
 import Home from './client/components/Home';
+import MapScreen from './client/components/MapScreen';
 
 const RootNavigator = StackNavigator({
   Main: {
@@ -10,13 +11,17 @@ const RootNavigator = StackNavigator({
     navigationOptions: {
       headerTitle: 'LivingHistory'
     }
+  },
+  MapScreen: {
+    screen: MapScreen
   }
 });
 
 export default class App extends React.Component {
+
   render() {
     return (
-      <RootNavigator />
+        <RootNavigator />
     );
   }
 }
