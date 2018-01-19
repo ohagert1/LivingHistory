@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 50,
     fontWeight: 'bold',
-    fontFamily: 'Arial',
     color: 'white'
   },
   transparentContainer: {
@@ -40,7 +39,6 @@ const styles = StyleSheet.create({
     marginTop: 25,
     fontSize: 20,
     fontWeight: 'bold',
-    fontFamily: 'Arial',
     color: 'white',
     textShadowColor: 'grey'
   },

@@ -20,37 +20,46 @@ class MapScreen extends Component{
 
   getCurrentLocation(){
   let location = {};
-  navigator.geolocation.getCurrentPosition(
+  this.watchId = navigator.geolocation.watchPosition(
     (position) => {
-      location.latitude = position.coords.latitude
-      location.longitude = position.coords.longitude
+      location.latitude = position.coords.latitude;
+      location.longitude = position.coords.longitude;
+      this.props.setLocation(location);
     },
     (error) => {
-      console.log(error.message)
-      location.longitude = 0
-      location.latitude = 0
+      console.log(error.message);
+      location.longitude = 0;
+      location.latitude = 0;
     },
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
   );
-  console.log('dispatching', location.latitude)
-  this.props.setLocation(location);
 }
 
   render() {
-    let location = this.props.location
-    console.log('render', location)
-    if(this.props.location) {
+    let location = this.props.location;
+    if(location.latitude && location.longitude) {
         return(
           <View style={styles.mapContainer}>
             <MapView
               style={styles.map}
-              initialRegion={{
+              region={{
                 latitude: location.latitude,
                 longitude: location.longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
               }}
+              showsUserLocation={true}
+              followsUserLocation={true}
             />
+            {
+              // this.state.markers.map(marker => (
+              //   <MapView.Marker
+              //     coordinate={marker.latlng}
+              //     title={marker.title}
+              //     description={marker.description}
+              //   )
+              // )
+            }
           </View>
       );
     }
@@ -59,7 +68,6 @@ class MapScreen extends Component{
 }
 
 function mapState(storeState){
-  console.log('state of store', storeState)
   return{
     location: storeState.location
   }
@@ -70,8 +78,6 @@ function mapDispatch(dispatch){
     setLocation: (location) => dispatch(getLocation(location))
   }
 }
-
-
 
 export default connect(mapState, mapDispatch)(MapScreen);
 

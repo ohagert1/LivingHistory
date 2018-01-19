@@ -22,7 +22,7 @@ const RootNavigator = StackNavigator({
   }
 });
 
-export default class App extends React.Component {
+export default class Navigator extends React.Component {
 
   render() {
     return (

@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
-const router = require('./router');
+const router = require('./routes/api');
 const app = express();
 
 
@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/', router);
+app.use('/api', router);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public'));
