@@ -9,4 +9,4 @@ Photos.belongsTo(Sites);
 module.exports = {
   Sites,
   Photos
-}
+};

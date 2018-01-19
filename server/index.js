@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 const router = require('./routes/api');
+const db = require('./db');
 const app = express();
 
 
@@ -23,6 +24,11 @@ app.use((err, req, res, next) => {
   console.error(err);
   console.error(err.stack);
   res.status(err.status || 500).send(err.message || 'Internal server error');
+});
+
+db.sync()
+.then(() => {
+  app.listen(PORT, () => console.log(`sering up history on ${PORT}`));
 });
 
 module.exports = app;
