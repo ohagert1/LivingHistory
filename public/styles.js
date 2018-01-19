@@ -21,21 +21,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 50,
     fontWeight: 'bold',
+    fontFamily: 'Arial',
     color: 'white'
   },
   transparentContainer: {
     flex: 1,
-    backgroundColor: 'transparent',
+    width: "100%",
+    backgroundColor: '#7F7F7F7F',
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  drawer: {
-    backgroundColor: 'transparent',
-    shadowColor: '#000000',
-    shadowOpacity: 0.8,
-    shadowRadius: 3,
-    textAlign: 'center',
-    height: 'auto'
   },
   centeredText: {
     backgroundColor: 'transparent',
@@ -46,6 +40,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     fontSize: 20,
     fontWeight: 'bold',
+    fontFamily: 'Arial',
     color: 'white',
     textShadowColor: 'grey'
   },
@@ -55,8 +50,8 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     ...StyleSheet.absoluteFillObject,
-    height: 400,
-    width: 400,
+    alignSelf: 'stretch',
+    width: null,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

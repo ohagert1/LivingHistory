@@ -16,7 +16,7 @@ const Home = ({ navigation }) => (
       <Button style={styles.button} onPress={() => console.log('hi')}>
         <Text style={styles.whiteText}>Log In</Text>
       </Button>
-      <Button style={styles.button} onPress={() => console.log('hi')}>
+      <Button style={styles.button} onPress={() => console.log(navigator.geolocation.getCurrentPosition())}>
         <Text style={styles.whiteText}>Sign Up</Text>
       </Button>
       <Button style={styles.button} onPress={() => navigation.navigate('MapScreen')}>

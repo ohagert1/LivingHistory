@@ -13,7 +13,10 @@ const RootNavigator = StackNavigator({
     }
   },
   MapScreen: {
-    screen: MapScreen
+    screen: MapScreen,
+    navigationOptions: {
+      headerTitle: 'Historical Locations'
+    }
   }
 });
 
