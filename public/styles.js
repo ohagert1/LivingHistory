@@ -50,8 +50,18 @@ const styles = StyleSheet.create({
     textShadowColor: 'grey'
   },
   button: {
-    borderColor: 'white',
+    borderColor: 'red',
     borderRadius: 1
+  },
+  mapContainer: {
+    ...StyleSheet.absoluteFillObject,
+    height: 400,
+    width: 400,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
   }
 });
 
