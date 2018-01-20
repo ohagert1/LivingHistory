@@ -77,6 +77,10 @@ const styles = StyleSheet.create({
   siteDescription: {
     marginTop: 20,
     textAlign: 'center'
+  },
+  testButton: {
+    zIndex: 1,
+    height: 1
   }
 });
 

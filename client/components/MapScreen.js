@@ -1,41 +1,57 @@
 import React, { Component } from 'react';
 import { Text, View, ImageBackground } from 'react-native';
-import Button from 'react-native-button';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import styles from '../../public/styles';
-import store, { getLocation, fetchSites } from '../store';
+import store, { getLocation, fetchSites, stopTest } from '../store';
 
 class MapScreen extends Component{
 
   constructor(props) {
     super(props);
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
-    this.testing = false;
   }
 
   componentDidMount() {
     this.getCurrentLocation();
   }
 
+  componentWillUnmount(){
+    clearInterval(this.int);
+    this.props.stopTesting();
+  }
+
   getCurrentLocation(){
     let location = {};
-    if(this.testing) {
+    if(this.props.testing) {
+      console.log('test mode');
+      location.latitude = 40.705284;
+      location.longitude = -74.00905;
+      this.props.setLocation(location);
+      this.props.loadNearbySites(location, this.props.sites || []);
       let counter = 0;
-      setInterval(() => {
+      this.int = setInterval(() => {
         if(counter === 0) {
           location.latitude = 40.708056;
           location.longitude = -74.012222;
+          counter++;
         } else if(counter === 1) {
           location.latitude = 40.704294;
           location.longitude = -74.013773;
-        } else if(counter === 3) {
+          counter++;
+        } else if(counter === 4) {
           location.latitude = 40.705591;
           location.longitude = -74.013427;
+          counter++;
+        } else if(counter === 3){
+          counter = 0;
+          location.latitude = 40.705284;
+          location.longitude = -74.00905;
         }
-
-      }, 10000)
+        this.props.setLocation(location);
+        this.props.loadNearbySites(location, this.props.sites || []);
+      }, 10000);
     } else {
       this.watchId = navigator.geolocation.watchPosition(
         (position) => {
@@ -64,8 +80,8 @@ class MapScreen extends Component{
               region={{
                 latitude: location.latitude,
                 longitude: location.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421
+                latitudeDelta: 0.002305,
+                longitudeDelta: 0.0010525
               }}
               showsUserLocation={true}
               followsUserLocation={true}
@@ -87,23 +103,27 @@ class MapScreen extends Component{
           </View>
       );
     }
-    return <Text>NOPE</Text>
+    return null;
   }
 }
 
 function mapState(storeState){
   return{
     location: storeState.location,
-    sites: storeState.sites
+    sites: storeState.sites,
+    testing: storeState.testing
   }
 }
 
 function mapDispatch(dispatch){
   return{
     setLocation: (location) => dispatch(getLocation(location)),
-    loadNearbySites: (location, currentSites) => dispatch(fetchSites(location, currentSites))
+    loadNearbySites: (location, currentSites) => dispatch(fetchSites(location, currentSites)),
+    stopTesting: (int) => {
+      clearInterval(int)
+      dispatch(stopTest())
+    }
   }
 }
 
 export default connect(mapState, mapDispatch)(MapScreen);
-
