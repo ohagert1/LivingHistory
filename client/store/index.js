@@ -7,8 +7,8 @@ import sites from './sites';
 
 const reducer = combineReducers({location, sites});
 const middleware = composeWithDevTools(applyMiddleware(
-  thunkMiddleware,
-  createLogger({collapsed: true})
+  thunkMiddleware
+  // createLogger({collapsed: true})
 ));
 const store = createStore(reducer, middleware);
 

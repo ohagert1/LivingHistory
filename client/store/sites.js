@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Notifications } from 'expo';
+import filterSites from './utils';
 
 //ACTION TYPES
 const GET_SITES = 'GET_SITES';
@@ -14,7 +15,7 @@ export const getSites = sites => {
   };
 };
 
-export const fetchSites = (self) =>{
+export const fetchSites = (self, currentSites) =>{
   let queryStr;
   if(self) {
     queryStr = '?location=' + self.latitude + '!' + self.longitude;
@@ -22,13 +23,10 @@ export const fetchSites = (self) =>{
   return function(dispatch) {
     axios.get(`http://${fsIP}:8080/api/sites` + (queryStr ? queryStr : ''))
     .then(res => res.data)
-    .then(sites => {
-      dispatch(getSites(sites));
-      return sites
-    })
     .then((sites) => {
       if(queryStr) {
-        sites.forEach((site) => {
+        let newSites = filterSites(sites, currentSites);
+        newSites.forEach((site) => {
           let notification = {
             title: 'There is a historic location nearby!',
             body: site.name,
@@ -36,8 +34,13 @@ export const fetchSites = (self) =>{
             android: {sound: true, vibrate: true}
           };
           Notifications.presentLocalNotificationAsync(notification);
-          Notifications.addListener(() => console.log('tapped', notification.title))
+          let EventSubscription = Notifications.addListener((list) => {
+          })
         });
+        console.log('newSites', newSites);
+        dispatch(getSites(newSites));
+      } else {
+        dispatch(getSites(sites));
       }
     })
     .catch(err => console.log(err));

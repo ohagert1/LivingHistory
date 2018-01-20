@@ -12,6 +12,7 @@ class MapScreen extends Component{
   constructor(props) {
     super(props);
     this.getCurrentLocation = this.getCurrentLocation.bind(this);
+    this.testing = false;
   }
 
   componentDidMount() {
@@ -20,20 +21,37 @@ class MapScreen extends Component{
 
   getCurrentLocation(){
     let location = {};
-    this.watchId = navigator.geolocation.watchPosition(
-      (position) => {
-        location.latitude = position.coords.latitude;
-        location.longitude = position.coords.longitude;
-        this.props.setLocation(location);
-        this.props.loadNearbySites(location);
-      },
-      (error) => {
-        console.log(error.message);
-        location.longitude = 0;
-        location.latitude = 0;
-      },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+    if(this.testing) {
+      let counter = 0;
+      setInterval(() => {
+        if(counter === 0) {
+          location.latitude = 40.708056;
+          location.longitude = -74.012222;
+        } else if(counter === 1) {
+          location.latitude = 40.704294;
+          location.longitude = -74.013773;
+        } else if(counter === 3) {
+          location.latitude = 40.705591;
+          location.longitude = -74.013427;
+        }
+
+      }, 10000)
+    } else {
+      this.watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          location.latitude = position.coords.latitude;
+          location.longitude = position.coords.longitude;
+          this.props.setLocation(location);
+          this.props.loadNearbySites(location, this.props.sites || []);
+        },
+        (error) => {
+          console.log(error.message);
+          location.longitude = 0;
+          location.latitude = 0;
+        },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
+    }
   }
 
   render() {
@@ -83,7 +101,7 @@ function mapState(storeState){
 function mapDispatch(dispatch){
   return{
     setLocation: (location) => dispatch(getLocation(location)),
-    loadNearbySites: (location) => dispatch(fetchSites(location))
+    loadNearbySites: (location, currentSites) => dispatch(fetchSites(location, currentSites))
   }
 }
 
