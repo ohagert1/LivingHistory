@@ -55,6 +55,25 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  siteContainer: {
+    flexDirection: 'column',
+    flex: 1
+  },
+  siteImage: {
+    flex: 1
+  },
+  siteTextContainer: {
+    flex: 1,
+    marginTop: 30,
+    alignItems: 'center'
+  },
+  siteName: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  siteDescription: {
+    marginTop: 20
   }
 });
 

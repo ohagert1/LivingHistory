@@ -19,22 +19,22 @@ class MapScreen extends Component{
   }
 
   getCurrentLocation(){
-  let location = {};
-  this.watchId = navigator.geolocation.watchPosition(
-    (position) => {
-      location.latitude = position.coords.latitude;
-      location.longitude = position.coords.longitude;
-      this.props.setLocation(location);
-      this.props.loadNearbySites(location);
-    },
-    (error) => {
-      console.log(error.message);
-      location.longitude = 0;
-      location.latitude = 0;
-    },
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-  );
-}
+    let location = {};
+    this.watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        location.latitude = position.coords.latitude;
+        location.longitude = position.coords.longitude;
+        this.props.setLocation(location);
+        this.props.loadNearbySites(location);
+      },
+      (error) => {
+        console.log(error.message);
+        location.longitude = 0;
+        location.latitude = 0;
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+  }
 
   render() {
     let location = this.props.location;
@@ -58,6 +58,7 @@ class MapScreen extends Component{
                   <MapView.Marker
                     coordinate={{latitude: +site.latitude, longitude: +site.longitude}}
                     key={site.id}
+                    onPress={() => this.props.navigation.navigate('SiteScreen', {site})}
                   />
                   )
 
