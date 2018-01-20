@@ -25,7 +25,6 @@ class MapScreen extends Component{
   getCurrentLocation(){
     let location = {};
     if(this.props.testing) {
-      console.log('test mode');
       location.latitude = 40.705284;
       location.longitude = -74.00905;
       this.props.setLocation(location);

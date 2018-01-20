@@ -4,7 +4,7 @@ import Button from 'react-native-button'
 import { StackNavigator } from 'react-navigation';
 import styles from '../../public/styles';
 import store from '../store';
-import {startTest, stopTest} from '../store';
+import { startTest } from '../store';
 const homeImage = require('../../public/homeImage.png');
 
 const Home = ({ navigation }) => (
