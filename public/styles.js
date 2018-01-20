@@ -58,22 +58,25 @@ const styles = StyleSheet.create({
   },
   siteContainer: {
     flexDirection: 'column',
-    flex: 1
+    flex: 1,
+    backgroundColor: '#7F7F7F7F'
   },
   siteImage: {
-    flex: 1
+    flex: 1.5
   },
   siteTextContainer: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 15,
     alignItems: 'center'
   },
   siteName: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   siteDescription: {
-    marginTop: 20
+    marginTop: 20,
+    textAlign: 'center'
   }
 });
 
