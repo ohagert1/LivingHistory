@@ -38,7 +38,7 @@ class MapScreen extends Component{
 
   render() {
     let location = this.props.location;
-    if(location.latitude && location.longitude && this.props.sites.length) {
+    if(location.latitude && location.longitude) {
         return(
           <View style={styles.mapContainer}>
             <MapView

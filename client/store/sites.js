@@ -2,6 +2,8 @@ import axios from 'axios';
 
 //ACTION TYPES
 const GET_SITES = 'GET_SITES';
+const homeIP = '192.168.50.250';
+const fsIP = '172.16.21.80';
 
 //ACTION CREATORS
 export const getSites = sites => {
@@ -18,7 +20,7 @@ export const fetchSites = (self) =>{
     queryStr = '?location=' + self.latitude + '!' + self.longitude;
   }
   return function(dispatch) {
-    axios.get('http://172.16.21.80:8080/api/sites' + (queryStr ? queryStr : ''))
+    axios.get(`http://${fsIP}:8080/api/sites` + (queryStr ? queryStr : ''))
     .then(res => res.data)
     .then(sites => {
       dispatch(getSites(sites));
