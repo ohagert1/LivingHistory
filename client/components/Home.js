@@ -13,12 +13,6 @@ const Home = ({ navigation }) => (
     >
     <View style={styles.transparentContainer}>
       <Text style={styles.homeText}>LivingHistory</Text>
-      <Button style={styles.button} onPress={() => console.log('hi')}>
-        <Text style={styles.whiteText}>Log In</Text>
-      </Button>
-      <Button style={styles.button} onPress={() => console.log('hi')}>
-        <Text style={styles.whiteText}>Sign Up</Text>
-      </Button>
       <Button style={styles.button} onPress={() => navigation.navigate('MapScreen')}>
         <Text style={styles.whiteText}>Use as Guest</Text>
       </Button>

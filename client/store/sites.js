@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notifications } from 'expo';
 
 //ACTION TYPES
 const GET_SITES = 'GET_SITES';
@@ -14,7 +15,6 @@ export const getSites = sites => {
 };
 
 export const fetchSites = (self) =>{
-  console.log('self in thunk creator', self);
   let queryStr;
   if(self) {
     queryStr = '?location=' + self.latitude + '!' + self.longitude;
@@ -24,6 +24,21 @@ export const fetchSites = (self) =>{
     .then(res => res.data)
     .then(sites => {
       dispatch(getSites(sites));
+      return sites
+    })
+    .then((sites) => {
+      if(queryStr) {
+        sites.forEach((site) => {
+          let notification = {
+            title: 'There is a historic location nearby!',
+            body: site.name,
+            ios: {sound: true},
+            android: {sound: true, vibrate: true}
+          };
+          Notifications.presentLocalNotificationAsync(notification);
+          Notifications.addListener(() => console.log('tapped', notification.title))
+        });
+      }
     })
     .catch(err => console.log(err));
   };
