@@ -12,6 +12,7 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
+    "server-start": "nodemon server -e html,js,scss --ignore public",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
@@ -21,7 +22,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "expo": "^23.0.4",
+    "pg": "^6.4.2",
     "react": "16.0.0",
     "react-native": "^0.50.3",
     "react-native-button": "^2.2.0",

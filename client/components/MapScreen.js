@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import styles from '../../public/styles';
-import store, { getLocation } from '../store';
+import store, { getLocation, fetchSites } from '../store';
 
 class MapScreen extends Component{
 
@@ -25,6 +25,7 @@ class MapScreen extends Component{
       location.latitude = position.coords.latitude;
       location.longitude = position.coords.longitude;
       this.props.setLocation(location);
+      this.props.loadNearbySites(location);
     },
     (error) => {
       console.log(error.message);
@@ -37,7 +38,7 @@ class MapScreen extends Component{
 
   render() {
     let location = this.props.location;
-    if(location.latitude && location.longitude) {
+    if(location.latitude && location.longitude && this.props.sites.length) {
         return(
           <View style={styles.mapContainer}>
             <MapView
@@ -50,16 +51,20 @@ class MapScreen extends Component{
               }}
               showsUserLocation={true}
               followsUserLocation={true}
-            />
+            >
             {
-              // this.state.markers.map(marker => (
-              //   <MapView.Marker
-              //     coordinate={marker.latlng}
-              //     title={marker.title}
-              //     description={marker.description}
-              //   )
-              // )
+              this.props.sites.map(site => {
+                return(
+                  <MapView.Marker
+                    coordinate={{latitude: +site.latitude, longitude: +site.longitude}}
+                    key={site.id}
+                  />
+                  )
+
+                }
+              )
             }
+            </MapView>
           </View>
       );
     }
@@ -69,13 +74,15 @@ class MapScreen extends Component{
 
 function mapState(storeState){
   return{
-    location: storeState.location
+    location: storeState.location,
+    sites: storeState.sites
   }
 }
 
 function mapDispatch(dispatch){
   return{
-    setLocation: (location) => dispatch(getLocation(location))
+    setLocation: (location) => dispatch(getLocation(location)),
+    loadNearbySites: (location) => dispatch(fetchSites(location))
   }
 }
 

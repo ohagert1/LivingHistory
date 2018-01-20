@@ -3,13 +3,15 @@ const { Photos, Sites } = require('../../db/models');
 
 
 router.get('/', (req, res, next) => {
-  Sites.scope('populated').findAll()
-  .then((sites => res.json(sites)))
+  Photos.scope('populated').findAll()
+  .then((photos => res.json(photos)))
   .catch(next);
 });
 
 router.get('/:id', (req, res, next) => {
-  Sites.scope('populated').findById(req.params.id)
-  .then((site) => res.json(site))
+  Photos.scope('populated').findById(req.params.id)
+  .then((photo) => res.json(photo))
   .catch(next);
 });
+
+module.exports = router;

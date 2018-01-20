@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const router = require('./routes/api');
 const db = require('./db');
 const app = express();
+const PORT = 8080;
 
 
 app.use(morgan('dev'));
@@ -28,7 +29,7 @@ app.use((err, req, res, next) => {
 
 db.sync()
 .then(() => {
-  app.listen(PORT, () => console.log(`sering up history on ${PORT}`));
+  app.listen(PORT, () => console.log(`serving up history on ${PORT}`));
 });
 
 module.exports = app;

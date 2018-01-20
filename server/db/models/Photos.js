@@ -1,6 +1,7 @@
 const db = require('../db');
+const Sequelize = require('sequelize');
 
-const Sites = db.define('Sites', {
+const Photos = db.define('Photos', {
   url: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -8,4 +9,4 @@ const Sites = db.define('Sites', {
   }
 });
 
-module.exports = Sites;
+module.exports = Photos;
