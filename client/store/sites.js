@@ -35,9 +35,8 @@ export const fetchSites = (self, currentSites) =>{
           };
           Notifications.presentLocalNotificationAsync(notification);
           let EventSubscription = Notifications.addListener((list) => {
-          })
+          });
         });
-        console.log('newSites', newSites);
         dispatch(getSites(newSites));
       } else {
         dispatch(getSites(sites));
