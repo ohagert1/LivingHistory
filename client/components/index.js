@@ -6,6 +6,7 @@ import styles from '../../public/styles';
 import store from '..//store';
 import Home from './Home';
 import MapScreen from './MapScreen';
+import SiteScreen from './SiteScreen';
 
 const RootNavigator = StackNavigator({
   Main: {
@@ -19,6 +20,9 @@ const RootNavigator = StackNavigator({
     navigationOptions: {
       headerTitle: 'Historical Locations'
     }
+  },
+  SiteScreen: {
+    screen: SiteScreen
   }
 });
 

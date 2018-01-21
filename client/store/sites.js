@@ -1,7 +1,11 @@
 import axios from 'axios';
+import { Notifications } from 'expo';
+import filterSites from './utils';
 
 //ACTION TYPES
 const GET_SITES = 'GET_SITES';
+const homeIP = '192.168.50.250';
+const fsIP = '172.16.21.80';
 
 //ACTION CREATORS
 export const getSites = sites => {
@@ -11,17 +15,32 @@ export const getSites = sites => {
   };
 };
 
-export const fetchSites = (self) =>{
-  console.log('self in thunk creator', self);
+export const fetchSites = (self, currentSites) =>{
   let queryStr;
   if(self) {
     queryStr = '?location=' + self.latitude + '!' + self.longitude;
   }
   return function(dispatch) {
-    axios.get('http://172.16.21.80:8080/api/sites' + (queryStr ? queryStr : ''))
+    axios.get(`http://${fsIP}:8080/api/sites` + (queryStr ? queryStr : ''))
     .then(res => res.data)
-    .then(sites => {
-      dispatch(getSites(sites));
+    .then((sites) => {
+      if(queryStr) {
+        let newSites = filterSites(sites, currentSites);
+        newSites.forEach((site) => {
+          let notification = {
+            title: 'There is a historic location nearby!',
+            body: site.name,
+            ios: {sound: true},
+            android: {sound: true, vibrate: true}
+          };
+          Notifications.presentLocalNotificationAsync(notification);
+          let EventSubscription = Notifications.addListener((list) => {
+          });
+        });
+        dispatch(getSites(newSites));
+      } else {
+        dispatch(getSites(sites));
+      }
     })
     .catch(err => console.log(err));
   };

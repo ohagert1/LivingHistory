@@ -55,6 +55,32 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  siteContainer: {
+    flexDirection: 'column',
+    flex: 1,
+    backgroundColor: '#7F7F7F7F'
+  },
+  siteImage: {
+    flex: 1.5
+  },
+  siteTextContainer: {
+    flex: 1,
+    marginTop: 15,
+    alignItems: 'center'
+  },
+  siteName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
+  siteDescription: {
+    marginTop: 20,
+    textAlign: 'center'
+  },
+  testButton: {
+    zIndex: 1,
+    height: 1
   }
 });
 

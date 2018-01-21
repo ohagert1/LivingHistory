@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
       const selfLat = +coords[0];
       const selfLon = +coords[1];
       return sites.filter((site) => {
-        return (distance(+site.latitude, +site.longitude, selfLat, selfLon) < 1);
+        return (distance(+site.latitude, +site.longitude, selfLat, selfLon) < 0.3);
     });
     }else {
       return sites;

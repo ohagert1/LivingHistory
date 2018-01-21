@@ -3,6 +3,8 @@ import { Text, View, ImageBackground } from 'react-native';
 import Button from 'react-native-button'
 import { StackNavigator } from 'react-navigation';
 import styles from '../../public/styles';
+import store from '../store';
+import { startTest } from '../store';
 const homeImage = require('../../public/homeImage.png');
 
 const Home = ({ navigation }) => (
@@ -13,14 +15,19 @@ const Home = ({ navigation }) => (
     >
     <View style={styles.transparentContainer}>
       <Text style={styles.homeText}>LivingHistory</Text>
-      <Button style={styles.button} onPress={() => console.log('hi')}>
-        <Text style={styles.whiteText}>Log In</Text>
+      <Button style={styles.button} onPress={() => {
+        navigation.navigate('MapScreen')
+        }
+      }>
+        <Text style={styles.whiteText}>Use As Guest</Text>
       </Button>
-      <Button style={styles.button} onPress={() => console.log('hi')}>
-        <Text style={styles.whiteText}>Sign Up</Text>
-      </Button>
-      <Button style={styles.button} onPress={() => navigation.navigate('MapScreen')}>
-        <Text style={styles.whiteText}>Use as Guest</Text>
+      <Button style={styles.button} onPress={() => {
+        clearInterval()
+        store.dispatch(startTest())
+        navigation.navigate('MapScreen')
+        }
+      }>
+        <Text style={styles.whiteText}>Use In Testing Mode</Text>
       </Button>
     </View>
     </ImageBackground>
