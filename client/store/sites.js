@@ -21,7 +21,7 @@ export const fetchSites = (self, currentSites) =>{
     queryStr = '?location=' + self.latitude + '!' + self.longitude;
   }
   return function(dispatch) {
-    axios.get(`https://localhost:8080/api/sites` + (queryStr ? queryStr : ''))
+    axios.get(`https://${homeIP}:8080/api/sites` + (queryStr ? queryStr : ''))
     .then(res => res.data)
     .then((sites) => {
       if(queryStr) {
