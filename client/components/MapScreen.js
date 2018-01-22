@@ -20,7 +20,6 @@ class MapScreen extends Component{
   componentWillUnmount(){
     clearInterval(this.int);
     this.props.stopTesting();
-    this.props.getSites([])
   }
 
   getCurrentLocation(){
