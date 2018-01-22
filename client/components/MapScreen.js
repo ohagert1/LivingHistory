@@ -110,8 +110,7 @@ function mapState(storeState){
   return{
     location: storeState.location,
     sites: storeState.sites,
-    testing: storeState.testing,
-    notifiedSite: storeState.notifiedSite
+    testing: storeState.testing
   }
 }
 

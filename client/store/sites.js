@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Notifications } from 'expo';
 import filterSites from './utils';
-import setSite from './notifiedSite';
 
 //ACTION TYPES
 const GET_SITES = 'GET_SITES';
@@ -37,7 +36,6 @@ export const fetchSites = (self, currentSites) =>{
           Notifications.presentLocalNotificationAsync(notification);
           let EventSubscription = Notifications.addListener((notification) => {
             if(notification.origin === 'selected') {
-              console.log('selected', site)
             }
           });
         });
