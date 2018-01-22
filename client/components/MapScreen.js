@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import styles from '../../public/styles';
-import store, { getLocation, fetchSites, stopTest } from '../store';
+import store, { getLocation, fetchSites, stopTest, getSites } from '../store';
 
 class MapScreen extends Component{
 
@@ -20,6 +20,7 @@ class MapScreen extends Component{
   componentWillUnmount(){
     clearInterval(this.int);
     this.props.stopTesting();
+    this.props.getSites([])
   }
 
   getCurrentLocation(){
