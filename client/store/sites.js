@@ -34,7 +34,9 @@ export const fetchSites = (self, currentSites) =>{
             android: {sound: true, vibrate: true}
           };
           Notifications.presentLocalNotificationAsync(notification);
-          let EventSubscription = Notifications.addListener((list) => {
+          let EventSubscription = Notifications.addListener((notification) => {
+            if(notification.origin === 'selected') {
+            }
           });
         });
         dispatch(getSites(newSites));
