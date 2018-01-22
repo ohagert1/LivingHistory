@@ -59,14 +59,14 @@ const styles = StyleSheet.create({
   siteContainer: {
     flexDirection: 'column',
     flex: 1,
-    backgroundColor: '#7F7F7F7F'
+    backgroundColor: '#edecee'
   },
   siteImage: {
-    flex: 1.5
+    flex: 1.3
   },
   siteTextContainer: {
     flex: 1,
-    marginTop: 15,
+    marginTop: 10,
     alignItems: 'center'
   },
   siteName: {
@@ -81,6 +81,21 @@ const styles = StyleSheet.create({
   testButton: {
     zIndex: 1,
     height: 1
+  },
+  flexHorizontal: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    borderWidth: 0.5
+  },
+  siteButtons: {
+    flex: 1,
+    borderWidth: 0.5
+  },
+  siteButtonsText: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold'
   }
 });
 

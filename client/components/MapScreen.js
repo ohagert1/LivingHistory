@@ -39,14 +39,14 @@ class MapScreen extends Component{
           location.latitude = 40.704294;
           location.longitude = -74.013773;
           counter++;
-        } else if(counter === 4) {
+        } else if(counter === 2) {
           location.latitude = 40.705591;
           location.longitude = -74.013427;
           counter++;
         } else if(counter === 3){
-          counter = 0;
           location.latitude = 40.705284;
           location.longitude = -74.00905;
+          counter = 0;
         }
         this.props.setLocation(location);
         this.props.loadNearbySites(location, this.props.sites || []);
@@ -110,7 +110,8 @@ function mapState(storeState){
   return{
     location: storeState.location,
     sites: storeState.sites,
-    testing: storeState.testing
+    testing: storeState.testing,
+    notifiedSite: storeState.notifiedSite
   }
 }
 

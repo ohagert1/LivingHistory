@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Notifications } from 'expo';
 import filterSites from './utils';
+import setSite from './notifiedSite';
 
 //ACTION TYPES
 const GET_SITES = 'GET_SITES';
@@ -34,7 +35,10 @@ export const fetchSites = (self, currentSites) =>{
             android: {sound: true, vibrate: true}
           };
           Notifications.presentLocalNotificationAsync(notification);
-          let EventSubscription = Notifications.addListener((list) => {
+          let EventSubscription = Notifications.addListener((notification) => {
+            if(notification.origin === 'selected') {
+              console.log('selected', site)
+            }
           });
         });
         dispatch(getSites(newSites));

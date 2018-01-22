@@ -12,17 +12,26 @@ const RootNavigator = StackNavigator({
   Main: {
     screen: Home,
     navigationOptions: {
-      headerTitle: 'LivingHistory'
+      headerTitle: 'LivingHistory',
+      headerStyle: {backgroundColor: '#edecee'},
+      headerTitleStyle: {alignSelf: 'center'}
     }
   },
   MapScreen: {
     screen: MapScreen,
     navigationOptions: {
-      headerTitle: 'Historical Locations'
+      headerTitle: 'LivingHistory',
+      headerStyle: {backgroundColor: '#edecee'},
+      headerTitleStyle: {alignSelf: 'center', marginRight: 68}
     }
   },
   SiteScreen: {
-    screen: SiteScreen
+    screen: SiteScreen,
+    navigationOptions: {
+      headerTitle: 'LivingHistory',
+      headerStyle: {backgroundColor: '#edecee'},
+      headerTitleStyle: {alignSelf: 'center', marginRight: 68}
+    }
   }
 });
 
